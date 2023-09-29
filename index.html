@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .calendar {
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        .calendar th, .calendar td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .calendar th {
+            background-color: #f2f2f2;
+        }
+
+        .today {
+            background-color: #1e90ff;
+            color: white;
+        }
+
+        .event {
+            background-color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weekly Calendar</h1>
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="today">1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <!-- You can continue filling out the calendar days here -->
+        </tbody>
+    </table>
+
+    <div id="event-modal" style="display: none;">
+        <h2>Add Event</h2>
+        <input type="text" id="event-title" placeholder="Event title">
+        <button id="add-event">Add</button>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('td');
+        const eventModal = document.getElementById('event-modal');
+        const eventTitleInput = document.getElementById('event-title');
+        const addEventButton = document.getElementById('add-event');
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const selectedCell = document.querySelector('.selected');
+                if (selectedCell) {
+                    selectedCell.classList.remove('selected');
+                }
+                cell.classList.add('selected');
+                eventModal.style.display = 'block';
+            });
+        });
+
+        addEventButton.addEventListener('click', () => {
+            const selectedCell = document.querySelector('.selected');
+            if (selectedCell) {
+                const eventTitle = eventTitleInput.value;
+                selectedCell.classList.add('event');
+                selectedCell.innerHTML = `<div>${selectedCell.innerText}</div><div>${eventTitle}</div>`;
+                eventModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
